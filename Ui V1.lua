@@ -1,203 +1,203 @@
-local UserInputService = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
-local LocalPlayer = game:GetService("Players").LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
-local CoreGui = LocalPlayer.PlayerGui 
-local function MakeDraggable(topbarobject, object)
-	local function CustomPos(topbarobject, object)
-		local Dragging = nil
-		local DragInput = nil
-		local DragStart = nil
-		local StartPosition = nil
+UserInputService cục bộ = trò chơi:GetService("UserInputService")
+TweenService cục bộ = trò chơi:GetService("TweenService")
+LocalPlayer cục bộ = trò chơi:GetService("Người chơi").LocalPlayer
+Chuột cục bộ = LocalPlayer:GetMouse()
+CoreGui cục bộ = LocalPlayer.PlayerGui
+hàm cục bộ MakeDraggable(topbarobject, object)
+	hàm cục bộ CustomPos(topbarobject, object)
+		Kéo cục bộ = nil
+		cục bộ DragInput = nil
+		DragStart cục bộ = nil
+		StartPosition cục bộ = nil
 
-		local function UpdatePos(input)
-			local Delta = input.Position - DragStart
-			local pos = UDim2.new(StartPosition.X.Scale, StartPosition.X.Offset + Delta.X, StartPosition.Y.Scale, StartPosition.Y.Offset + Delta.Y)
-			local Tween = TweenService:Create(object, TweenInfo.new(0.2), {Position = pos})
-			Tween:Play()
-		end
+		hàm cục bộ UpdatePos(đầu vào)
+			Delta cục bộ = input.Position - DragStart
+			pos cục bộ = UDim2.new(StartPosition.X.Scale, StartPosition.X.Offset + Delta.X, StartPosition.Y.Scale, StartPosition.Y.Offset + Delta.Y)
+			Tween cục bộ = TweenService:Create(đối tượng, TweenInfo.new(0.2), {Vị trí = pos})
+			Tween:Phát()
+		kết thúc
 
-		topbarobject.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				Dragging = true
-				DragStart = input.Position
-				StartPosition = object.Position
+		topbarobject.InputBegan:Connect(hàm(đầu vào)
+			nếu input.UserInputType == Enum.UserInputType.MouseButton1 hoặc input.UserInputType == Enum.UserInputType.Touch thì
+				Kéo = đúng
+				DragStart = đầu vào.Vị trí
+				StartPosition = đối tượng.Position
 
-				input.Changed:Connect(function()
-					if input.UserInputState == Enum.UserInputState.End then
-						Dragging = false
-					end
-				end)
-			end
-		end)
+				đầu vào.Đã thay đổi:Kết nối(hàm()
+					nếu input.UserInputState == Enum.UserInputState.End thì
+						Kéo = sai
+					kết thúc
+				kết thúc)
+			kết thúc
+		kết thúc)
 
-		topbarobject.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				DragInput = input
-			end
-		end)
+		topbarobject.InputChanged:Connect(hàm(đầu vào)
+			nếu input.UserInputType == Enum.UserInputType.MouseMovement hoặc input.UserInputType == Enum.UserInputType.Touch thì
+				DragInput = đầu vào
+			kết thúc
+		kết thúc)
 
-		UserInputService.InputChanged:Connect(function(input)
-			if input == DragInput and Dragging then
-				UpdatePos(input)
-			end
-		end)
-	end
-	local function CustomSize(object)
-		local Dragging = false
-		local DragInput = nil
-		local DragStart = nil
-		local StartSize = nil
-		local maxSizeX = object.Size.X.Offset
-		if maxSizeX < 400 then
-			maxSizeX = 400
-		end
-		local maxSizeY = maxSizeX - 100
-		object.Size = UDim2.new(0, maxSizeX, 0, maxSizeY)
-		local changesizeobject = Instance.new("Frame");
+		UserInputService.InputChanged:Kết nối(hàm(đầu vào)
+			nếu đầu vào == DragInput và Kéo thì
+				UpdatePos(đầu vào)
+			kết thúc
+		kết thúc)
+	kết thúc
+	hàm cục bộ CustomSize(object)
+		Kéo cục bộ = false
+		cục bộ DragInput = nil
+		DragStart cục bộ = nil
+		StartSize cục bộ = nil
+		maxSizeX cục bộ = đối tượng.Size.X.Offset
+		nếu maxSizeX < 400 thì
+			Kích thước tối đa = 400
+		kết thúc
+		maxSizeY cục bộ = maxSizeX - 100
+		đối tượng.Kích thước = UDim2.new(0, maxSizeX, 0, maxSizeY)
+		thay đổi kích thước cục bộ object = Instance.new("Khung");
 
-		changesizeobject.AnchorPoint = Vector2.new(1, 1)
-		changesizeobject.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		changesizeobject.BackgroundTransparency = 0.9990000128746033
-		changesizeobject.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		changesizeobject.BorderSizePixel = 0
-		changesizeobject.Position = UDim2.new(1, 20, 1, 20)
-		changesizeobject.Size = UDim2.new(0, 40, 0, 40)
+		thay đổi kích thước đối tượng.AnchorPoint = Vector2.new(1, 1)
+		thay đổi kích thước đối tượng.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		changesizeobject. Độ trong suốt của nền = 0,9990000128746033
+		thay đổi kích thước đối tượng.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		thay đổi kích thước đối tượng. BorderSizePixel = 0
+		thay đổi kích thước đối tượng.Vị trí = UDim2.mới(1, 20, 1, 20)
+		thay đổi kích thước đối tượng. Kích thước = UDim2. mới (0, 40, 0, 40)
 		changesizeobject.Name = "changesizeobject"
-		changesizeobject.Parent = object
+		changesizeobject.Parent = đối tượng
 
-		local function UpdateSize(input)
-			local Delta = input.Position - DragStart
-			local newWidth = StartSize.X.Offset + Delta.X
-			local newHeight = StartSize.Y.Offset + Delta.Y
+		hàm cục bộ UpdateSize(đầu vào)
+			Delta cục bộ = input.Position - DragStart
+			newWidth cục bộ = StartSize.X.Offset + Delta.X
+			newHeight cục bộ = StartSize.Y.Offset + Delta.Y
 			newWidth = math.max(newWidth, maxSizeX)
 			newHeight = math.max(newHeight, maxSizeY)
-			local Tween = TweenService:Create(object, TweenInfo.new(0.2), {Size = UDim2.new(0, newWidth, 0, newHeight)})
-			Tween:Play()
-		end
+			Tween cục bộ = TweenService:Create(đối tượng, TweenInfo.new(0.2), {Kích thước = UDim2.new(0, newWidth, 0, newHeight)})
+			Tween:Phát()
+		kết thúc
 
-		changesizeobject.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				Dragging = true
-				DragStart = input.Position
-				StartSize = object.Size
-				input.Changed:Connect(function()
-					if input.UserInputState == Enum.UserInputState.End then
-						Dragging = false
-					end
-				end)
-			end
-		end)
+		changesizeobject.InputBegan:Connect(hàm(đầu vào)
+			nếu input.UserInputType == Enum.UserInputType.MouseButton1 hoặc input.UserInputType == Enum.UserInputType.Touch thì
+				Kéo = đúng
+				DragStart = đầu vào.Vị trí
+				StartSize = đối tượng.Size
+				đầu vào.Đã thay đổi:Kết nối(hàm()
+					nếu input.UserInputState == Enum.UserInputState.End thì
+						Kéo = sai
+					kết thúc
+				kết thúc)
+			kết thúc
+		kết thúc)
 
-		changesizeobject.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				DragInput = input
-			end
-		end)
+		changesizeobject.InputChanged:Connect(hàm(đầu vào)
+			nếu input.UserInputType == Enum.UserInputType.MouseMovement hoặc input.UserInputType == Enum.UserInputType.Touch thì
+				DragInput = đầu vào
+			kết thúc
+		kết thúc)
 
-		UserInputService.InputChanged:Connect(function(input)
-			if input == DragInput and Dragging then
-				UpdateSize(input)
-			end
-		end)
-	end
-	CustomSize(object)
-	CustomPos(topbarobject, object)
-end
-function CircleClick(Button, X, Y)
-	spawn(function()
-		Button.ClipsDescendants = true
-		local Circle = Instance.new("ImageLabel")
+		UserInputService.InputChanged:Kết nối(hàm(đầu vào)
+			nếu đầu vào == DragInput và Kéo thì
+				Cập nhật kích thước(đầu vào)
+			kết thúc
+		kết thúc)
+	kết thúc
+	CustomSize(đối tượng)
+	CustomPos(topbarobject, đối tượng)
+kết thúc
+hàm CircleClick(Button, X, Y)
+	sinh ra(hàm()
+		Button.ClipsDescendants = đúng
+		vòng tròn cục bộ = Instance.new("ImageLabel")
 		Circle.Image = "rbxassetid://266543268"
 		Circle.ImageColor3 = Color3.fromRGB(80, 80, 80)
 		Circle.ImageTransparency = 0.8999999761581421
 		Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		Circle.BackgroundTransparency = 1
 		Circle.ZIndex = 10
-		Circle.Name = "Circle"
-		Circle.Parent = Button
+		Circle.Name = "Vòng tròn"
+		Circle.Parent = Nút
 		
-		local NewX = X - Circle.AbsolutePosition.X
-		local NewY = Y - Circle.AbsolutePosition.Y
+		cục bộ NewX = X - Circle.AbsolutePosition.X
+		cục bộ NewY = Y - Circle.AbsolutePosition.Y
 		Circle.Position = UDim2.new(0, NewX, 0, NewY)
-		local Size = 0
-		if Button.AbsoluteSize.X > Button.AbsoluteSize.Y then
-			Size = Button.AbsoluteSize.X*1.5
-		elseif Button.AbsoluteSize.X < Button.AbsoluteSize.Y then
-			Size = Button.AbsoluteSize.Y*1.5
-		elseif Button.AbsoluteSize.X == Button.AbsoluteSize.Y then
-			Size = Button.AbsoluteSize.X*1.5
-		end
+		Kích thước cục bộ = 0
+		nếu Button.AbsoluteSize.X > Button.AbsoluteSize.Y thì
+			Kích thước = Button.AbsoluteSize.X*1.5
+		nếu không thì Button.AbsoluteSize.X < Button.AbsoluteSize.Y thì
+			Kích thước = Button.AbsoluteSize.Y*1.5
+		nếu không thì Button.AbsoluteSize.X == Button.AbsoluteSize.Y thì
+			Kích thước = Button.AbsoluteSize.X*1.5
+		kết thúc
 
-		local Time = 0.5
-		Circle:TweenSizeAndPosition(UDim2.new(0, Size, 0, Size), UDim2.new(0.5, -Size/2, 0.5, -Size/2), "Out", "Quad", Time, false, nil)
-		for i=1,10 do
-			Circle.ImageTransparency = Circle.ImageTransparency + 0.01
-			wait(Time/10)
-		end
-		Circle:Destroy()
-	end)
-end
+		Giờ địa phương = 0,5
+		Vòng tròn: TweenSizeAndPosition(UDim2.new(0, Size, 0, Size), UDim2.new(0.5, -Size/2, 0.5, -Size/2), "Out", "Quad", Time, false, nil)
+		đối với i=1,10 thì
+			Circle.ImageTransparency = Circle.ImageTransparency + 0,01
+			chờ(Thời gian/10)
+		kết thúc
+		Vòng tròn: Phá hủy()
+	kết thúc)
+kết thúc
 
-local CatLib = {}
-function CatLib:MakeNotify(NotifyConfig)
-	local NotifyConfig = NotifyConfig or {}
-	NotifyConfig.Title = NotifyConfig.Title or "Cat Hub"
-	NotifyConfig.Description = NotifyConfig.Description or "Notification"
-	NotifyConfig.Content = NotifyConfig.Content or "Content"
-	NotifyConfig.Color = NotifyConfig.Color or Color3.fromRGB(255, 0, 255)
-	NotifyConfig.Time = NotifyConfig.Time or 0.5
-	NotifyConfig.Delay = NotifyConfig.Delay or 5
-	local NotifyFunction = {}
-	spawn(function()
-		if not CoreGui:FindFirstChild("NotifyGui") then
-			local NotifyGui = Instance.new("ScreenGui");
+CatLib cục bộ = {}
+chức năng CatLib:MakeNotify(NotifyConfig)
+	local NotifyConfig = NotifyConfig hoặc {}
+	NotifyConfig.Title = NotifyConfig.Title hoặc "Cat Hub"
+	NotifyConfig.Description = NotifyConfig.Description hoặc "Thông báo"
+	NotifyConfig.Content = NotifyConfig.Content hoặc "Nội dung"
+	NotifyConfig.Color = NotifyConfig.Color hoặc Color3.fromRGB(255, 0, 255)
+	NotifyConfig.Time = NotifyConfig.Time hoặc 0,5
+	NotifyConfig.Delay = NotifyConfig.Delay hoặc 5
+	hàm NotifyFunction cục bộ = {}
+	sinh ra(hàm()
+		nếu không phải CoreGui:FindFirstChild("NotifyGui") thì
+			cục bộ NotifyGui = Instance.new("ScreenGui");
 			NotifyGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 			NotifyGui.Name = "NotifyGui"
 			NotifyGui.Parent = CoreGui
-		end
-		if not CoreGui.NotifyGui:FindFirstChild("NotifyLayout") then
-			local NotifyLayout = Instance.new("Frame");
+		kết thúc
+		nếu không phải CoreGui.NotifyGui:FindFirstChild("NotifyLayout") thì
+			cục bộ NotifyLayout = Instance.new("Khung");
 			NotifyLayout.AnchorPoint = Vector2.new(1, 1)
 			NotifyLayout.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			NotifyLayout.BackgroundTransparency = 0.9990000128746033
+			NotifyLayout.BackgroundTransparency = 0,9990000128746033
 			NotifyLayout.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			NotifyLayout.BorderSizePixel = 0
 			NotifyLayout.Position = UDim2.new(1, -30, 1, -30)
 			NotifyLayout.Size = UDim2.new(0, 320, 1, 0)
 			NotifyLayout.Name = "NotifyLayout"
 			NotifyLayout.Parent = CoreGui.NotifyGui
-			local Count = 0
-			CoreGui.NotifyGui.NotifyLayout.ChildRemoved:Connect(function()
-				Count = 0
-				for i, v in CoreGui.NotifyGui.NotifyLayout:GetChildren() do
-					TweenService:Create(
+			Đếm cục bộ = 0
+			CoreGui.NotifyGui.NotifyLayout.ChildRemoved:Kết nối(hàm()
+				Đếm = 0
+				đối với i, v trong CoreGui.NotifyGui.NotifyLayout:GetChildren() thực hiện
+					TweenService:Tạo(
 						v,
 						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-						{Position = UDim2.new(0, 0, 1, -((v.Size.Y.Offset + 12)*Count))}
-					):Play()
-					Count = Count + 1
-				end
-			end)
-		end
-		local NotifyPosHeigh = 0
-		for i, v in CoreGui.NotifyGui.NotifyLayout:GetChildren() do
+						{Vị trí = UDim2.new(0, 0, 1, -((v.Kích thước.Y.Độ lệch + 12)*Số lượng))}
+					):Chơi()
+					Đếm = Đếm + 1
+				kết thúc
+			kết thúc)
+		kết thúc
+		cục bộ NotifyPosHeigh = 0
+		đối với i, v trong CoreGui.NotifyGui.NotifyLayout:GetChildren() thực hiện
 			NotifyPosHeigh = -(v.Position.Y.Offset) + v.Size.Y.Offset + 12
-		end
-		local NotifyFrame = Instance.new("Frame");
-		local NotifyFrameReal = Instance.new("Frame");
-		local UICorner = Instance.new("UICorner");
-		local DropShadowHolder = Instance.new("Frame");
-		local DropShadow = Instance.new("ImageLabel");
-		local Top = Instance.new("Frame");
-		local TextLabel = Instance.new("TextLabel");
-		local UIStroke = Instance.new("UIStroke");
-		local UICorner1 = Instance.new("UICorner");
-		local TextLabel1 = Instance.new("TextLabel");
-		local UIStroke1 = Instance.new("UIStroke");
-		local Close = Instance.new("TextButton");
-		local ImageLabel = Instance.new("ImageLabel");
-		local TextLabel2 = Instance.new("TextLabel");
+		kết thúc
+		NotifyFrame cục bộ = Instance.new("Khung");
+		cục bộ NotifyFrameReal = Instance.new("Frame");
+		UICorner cục bộ = Instance.new("UICorner");
+		DropShadowHolder cục bộ = Instance.new("Frame");
+		DropShadow cục bộ = Instance.new("ImageLabel");
+		Top cục bộ = Instance.new("Frame");
+		TextLabel cục bộ = Instance.new("TextLabel");
+		UIStroke cục bộ = Instance.new("UIStroke");
+		UICorner1 cục bộ = Instance.new("UICorner");
+		TextLabel1 cục bộ = Instance.new("TextLabel");
+		UIStroke1 cục bộ = Instance.new("UIStroke");
+		cục bộ Đóng = Instance.new("TextButton");
+		ImageLabel cục bộ = Instance.new("ImageLabel");
+		TextLabel2 cục bộ = Instance.new("TextLabel");
 
 		NotifyFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 		NotifyFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -225,18 +225,18 @@ function CatLib:MakeNotify(NotifyConfig)
 		DropShadowHolder.Size = UDim2.new(1, 0, 1, 0)
 		DropShadowHolder.ZIndex = 0
 		DropShadowHolder.Name = "DropShadowHolder"
-		DropShadowHolder.Parent = NotifyFrameReal
+		DropShadowHolder.Parent = Thông báo FrameReal
 
 		DropShadow.Image = "rbxassetid://6015897843"
 		DropShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
-		DropShadow.ImageTransparency = 0.5
+		DropShadow. Độ trong suốt của hình ảnh = 0,5
 		DropShadow.ScaleType = Enum.ScaleType.Slice
 		DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
-		DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-		DropShadow.BackgroundTransparency = 1
+		DropShadow.AnchorPoint = Vector2.new(0,5, 0,5)
+		DropShadow. Độ trong suốt của nền = 1
 		DropShadow.BorderSizePixel = 0
-		DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
-		DropShadow.Size = UDim2.new(1, 47, 1, 47)
+		DropShadow.Position = UDim2.new(0,5, 0, 0,5, 0)
+		DropShadow. Kích thước = UDim2. mới(1, 47, 1, 47)
 		DropShadow.ZIndex = 0
 		DropShadow.Name = "DropShadow"
 		DropShadow.Parent = DropShadowHolder
@@ -250,74 +250,74 @@ function CatLib:MakeNotify(NotifyConfig)
 		Top.Parent = NotifyFrameReal
 
 		TextLabel.Font = Enum.Font.GothamBold
-		TextLabel.Text = NotifyConfig.Title
+		Nhãn văn bản. Văn bản = NotifyConfig. Tiêu đề
 		TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel.TextSize = 14
+		Nhãn văn bản.Kích thước văn bản = 14
 		TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-		TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel.BackgroundTransparency = 0.9990000128746033
-		TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Nhãn văn bản.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabel.BackgroundTransparency = 0,9990000128746033
+		Nhãn văn bản.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		TextLabel.BorderSizePixel = 0
-		TextLabel.Size = UDim2.new(1, 0, 1, 0)
-		TextLabel.Parent = Top
-		TextLabel.Position = UDim2.new(0, 10, 0, 0)
+		Nhãn văn bản.Kích thước = UDim2.mới(1, 0, 1, 0)
+		TextLabel.Parent = Trên cùng
+		Nhãn văn bản.Vị trí = UDim2.mới(0, 10, 0, 0)
 
 		UIStroke.Color = Color3.fromRGB(255, 255, 255)
-		UIStroke.Thickness = 0.30000001192092896
-		UIStroke.Parent = TextLabel
+		Độ dày UIStroke = 0,30000001192092896
+		UIStroke.Parent = Nhãn văn bản
 
-		UICorner1.Parent = Top
+		UICorner1.Parent = Đầu trang
 		UICorner1.CornerRadius = UDim.new(0, 5)
 
 		TextLabel1.Font = Enum.Font.GothamBold
-		TextLabel1.Text = NotifyConfig.Description
-		TextLabel1.TextColor3 = NotifyConfig.Color
-		TextLabel1.TextSize = 14
+		TextLabel1.Text = NotifyConfig.Mô ​​tả
+		TextLabel1.TextColor3 = Thông báoCấu hình.Màu
+		TextLabel1.Kích thước văn bản = 14
 		TextLabel1.TextXAlignment = Enum.TextXAlignment.Left
-		TextLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel1.BackgroundTransparency = 0.9990000128746033
-		TextLabel1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Nhãn văn bản1.Màu nền3 = Màu3.từRGB(255, 255, 255)
+		TextLabel1.BackgroundTransparency = 0,9990000128746033
+		Nhãn văn bản1.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		TextLabel1.BorderSizePixel = 0
-		TextLabel1.Size = UDim2.new(1, 0, 1, 0)
+		TextLabel1.Kích thước = UDim2.mới(1, 0, 1, 0)
 		TextLabel1.Position = UDim2.new(0, TextLabel.TextBounds.X + 15, 0, 0)
-		TextLabel1.Parent = Top
+		TextLabel1.Parent = Trên cùng
 
-		UIStroke1.Color = NotifyConfig.Color
-		UIStroke1.Thickness = 0.4000000059604645
-		UIStroke1.Parent = TextLabel1
+		UIStroke1.Color = Thông báo cấu hình màu
+		UIStroke1.Độ dày = 0,4000000059604645
+		UIStroke1.Parent = Nhãn văn bản1
 
-		Close.Font = Enum.Font.SourceSans
-		Close.Text = ""
-		Close.TextColor3 = Color3.fromRGB(0, 0, 0)
-		Close.TextSize = 14
-		Close.AnchorPoint = Vector2.new(1, 0.5)
-		Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Close.BackgroundTransparency = 0.9990000128746033
-		Close.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Close.BorderSizePixel = 0
-		Close.Position = UDim2.new(1, -5, 0.5, 0)
-		Close.Size = UDim2.new(0, 25, 0, 25)
-		Close.Name = "Close"
-		Close.Parent = Top
+		Đóng.Font = Enum.Font.SourceSans
+		Đóng.Văn bản = ""
+		Đóng.TextColor3 = Color3.fromRGB(0, 0, 0)
+		Đóng.TextSize = 14
+		Đóng.AnchorPoint = Vector2.new(1, 0.5)
+		Đóng.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Đóng. Độ trong suốt của nền = 0,9990000128746033
+		Đóng.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Đóng. BorderSizePixel = 0
+		Đóng.Vị trí = UDim2.new(1, -5, 0,5, 0)
+		Đóng.Kích thước = UDim2.new(0, 25, 0, 25)
+		Close.Name = "Đóng"
+		Đóng.Cha = Đầu trang
 
 		ImageLabel.Image = "rbxassetid://9886659671"
 		ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
 		ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		ImageLabel.BackgroundTransparency = 0.9990000128746033
+		ImageLabel.BackgroundTransparency = 0,9990000128746033
 		ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		ImageLabel.BorderSizePixel = 0
 		ImageLabel.Position = UDim2.new(0.49000001, 0, 0.5, 0)
 		ImageLabel.Size = UDim2.new(1, -8, 1, -8)
-		ImageLabel.Parent = Close
+		ImageLabel.Parent = Đóng
 
 		TextLabel2.Font = Enum.Font.GothamBold
 		TextLabel2.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel2.TextSize = 13
+		TextLabel2.Kích thước văn bản = 13
 		TextLabel2.Text = NotifyConfig.Content
 		TextLabel2.TextXAlignment = Enum.TextXAlignment.Left
 		TextLabel2.TextYAlignment = Enum.TextYAlignment.Top
 		TextLabel2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel2.BackgroundTransparency = 0.9990000128746033
+		TextLabel2.BackgroundTransparency = 0,9990000128746033
 		TextLabel2.TextColor3 = Color3.fromRGB(150.0000062584877, 150.0000062584877, 150.0000062584877)
 		TextLabel2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		TextLabel2.BorderSizePixel = 0
@@ -326,77 +326,77 @@ function CatLib:MakeNotify(NotifyConfig)
 		TextLabel2.Size = UDim2.new(1, -20, 0, 13)
 
 		TextLabel2.Size = UDim2.new(1, -20, 0, 13 + (13 * (TextLabel2.TextBounds.X / TextLabel2.AbsoluteSize.X)))
-		TextLabel2.TextWrapped = true
+		TextLabel2.TextWrapped = đúng
 
-		if TextLabel2.AbsoluteSize.Y < 27 then
+		nếu TextLabel2.AbsoluteSize.Y < 27 thì
 			NotifyFrame.Size = UDim2.new(1, 0, 0, 65)
-		else
+		khác
 			NotifyFrame.Size = UDim2.new(1, 0, 0, TextLabel2.AbsoluteSize.Y + 40)
-		end
-		local waitbruh = false
-		function NotifyFunction:Close()
-			if waitbruh then
-				return false
-			end
-			waitbruh = true
-			TweenService:Create(
-				NotifyFrameReal,
+		kết thúc
+		waitbruh cục bộ = sai
+		chức năng NotifyFunction:Close()
+			nếu waitbruh thì
+				trả về sai
+			kết thúc
+			waitbruh = đúng
+			TweenService:Tạo(
+				Thông báo Khung thực tế,
 				TweenInfo.new(tonumber(NotifyConfig.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-				{Position = UDim2.new(0, 400, 0, 0)}
-			):Play()
+				{Vị trí = UDim2.new(0, 400, 0, 0)}
+			):Chơi()
 			task.wait(tonumber(NotifyConfig.Time) / 1.2)
-			NotifyFrame:Destroy()
-		end
-		Close.Activated:Connect(function()
-			NotifyFunction:Close()
-		end)
-		TweenService:Create(
-			NotifyFrameReal,
+			NotifyFrame: Phá hủy()
+		kết thúc
+		Đóng.Kích hoạt:Kết nối(hàm()
+			Hàm thông báo: Đóng()
+		kết thúc)
+		TweenService:Tạo(
+			Thông báo Khung thực tế,
 			TweenInfo.new(tonumber(NotifyConfig.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-			{Position = UDim2.new(0, 0, 0, 0)}
-		):Play()
+			{Vị trí = UDim2.new(0, 0, 0, 0)}
+		):Chơi()
 		task.wait(tonumber(NotifyConfig.Delay))
-		NotifyFunction:Close()
-	end)
-	return NotifyFunction
-end
-function CatLib:MakeGui(GuiConfig)
-	local GuiConfig = GuiConfig or {}
-	GuiConfig.NameHub = GuiConfig.NameHub or "Cat Hub"
-	GuiConfig.Description = GuiConfig.Description or "by: catdzs1vn"
-	GuiConfig.Color = GuiConfig.Color or Color3.fromRGB(255, 0, 255)
-	GuiConfig["Logo Player"] = GuiConfig["Logo Player"] or "https://www.roblox.com/headshot-thumbnail/image?userId="..game:GetService("Players").LocalPlayer.UserId .."&width=420&height=420&format=png"
-	GuiConfig["Name Player"] = GuiConfig["Name Player"] or tostring(game:GetService("Players").LocalPlayer.Name)
-	GuiConfig["Tab Width"] = GuiConfig["Tab Width"] or 150
-	local GuiFunc = {}
+		Hàm thông báo: Đóng()
+	kết thúc)
+	trả về NotifyFunction
+kết thúc
+chức năng CatLib:MakeGui(GuiConfig)
+	GuiConfig cục bộ = GuiConfig hoặc {}
+	GuiConfig.NameHub = GuiConfig.NameHub hoặc "Cat Hub"
+	GuiConfig.Description = GuiConfig.Description hoặc "bởi: catdzs1vn"
+	GuiConfig.Color = GuiConfig.Color hoặc Color3.fromRGB(255, 0, 255)
+	GuiConfig["Logo Player"] = GuiConfig["Logo Player"] hoặc "https://www.roblox.com/headshot-thumbnail/image?userId="..game:GetService("Players").LocalPlayer.UserId .."&width=420&height=420&format=png"
+	GuiConfig["Tên người chơi"] = GuiConfig["Tên người chơi"] hoặc tostring(game:GetService("Players").LocalPlayer.Name)
+	GuiConfig["Chiều rộng tab"] = GuiConfig["Chiều rộng tab"] hoặc 150
+	GuiFunc cục bộ = {}
 
-	local HirimiGui = Instance.new("ScreenGui");
-	local DropShadowHolder = Instance.new("Frame");
-	local DropShadow = Instance.new("ImageLabel");
-	local Main = Instance.new("Frame");
-	local UICorner = Instance.new("UICorner");
-	local UIStroke = Instance.new("UIStroke");
-	local Top = Instance.new("Frame");
-	local TextLabel = Instance.new("TextLabel");
-	local UICorner1 = Instance.new("UICorner");
-	local TextLabel1 = Instance.new("TextLabel");
-	local UIStroke1 = Instance.new("UIStroke");
-	local MaxRestore = Instance.new("TextButton");
-	local ImageLabel = Instance.new("ImageLabel");
-	local Close = Instance.new("TextButton");
-	local ImageLabel1 = Instance.new("ImageLabel");
+	HirimiGui cục bộ = Instance.new("ScreenGui");
+	DropShadowHolder cục bộ = Instance.new("Frame");
+	DropShadow cục bộ = Instance.new("ImageLabel");
+	cục bộ Main = Instance.new("Khung");
+	UICorner cục bộ = Instance.new("UICorner");
+	UIStroke cục bộ = Instance.new("UIStroke");
+	Top cục bộ = Instance.new("Frame");
+	TextLabel cục bộ = Instance.new("TextLabel");
+	UICorner1 cục bộ = Instance.new("UICorner");
+	TextLabel1 cục bộ = Instance.new("TextLabel");
+	UIStroke1 cục bộ = Instance.new("UIStroke");
+	cục bộ MaxRestore = Instance.new("TextButton");
+	ImageLabel cục bộ = Instance.new("ImageLabel");
+	cục bộ Đóng = Instance.new("TextButton");
+	ImageLabel1 cục bộ = Instance.new("ImageLabel");
 	local Min = Instance.new("TextButton");
-	local ImageLabel2 = Instance.new("ImageLabel");
-	local LayersTab = Instance.new("Frame");
-	local UICorner2 = Instance.new("UICorner");
-	local DecideFrame = Instance.new("Frame");
-	local UIStroke3 = Instance.new("UIStroke");
-	local Layers = Instance.new("Frame");
-	local UICorner6 = Instance.new("UICorner");
-	local NameTab = Instance.new("TextLabel");
-	local LayersReal = Instance.new("Frame");
-	local LayersFolder = Instance.new("Folder");
-	local LayersPageLayout = Instance.new("UIPageLayout");
+	ImageLabel2 cục bộ = Instance.new("ImageLabel");
+	LayersTab cục bộ = Instance.new("Khung");
+	UICorner2 cục bộ = Instance.new("UICorner");
+	cục bộ DecideFrame = Instance.new("Frame");
+	UIStroke3 cục bộ = Instance.new("UIStroke");
+	Lớp cục bộ = Instance.new("Khung");
+	UICorner6 cục bộ = Instance.new("UICorner");
+	NameTab cục bộ = Instance.new("TextLabel");
+	LayersReal cục bộ = Instance.new("Khung");
+	LayersFolder cục bộ = Instance.new("Thư mục");
+	LayersPageLayout cục bộ = Instance.new("UIPageLayout");
 
 	HirimiGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	HirimiGui.Name = "HirimiGui"
@@ -412,33 +412,33 @@ function CatLib:MakeGui(GuiConfig)
   DropShadowHolder.Position = UDim2.new(0, (HirimiGui.AbsoluteSize.X // 2 - DropShadowHolder.Size.X.Offset // 2), 0, (HirimiGui.AbsoluteSize.Y // 2 - DropShadowHolder.Size.Y.Offset // 2))
 	DropShadow.Image = "rbxassetid://6015897843"
 	DropShadow.ImageColor3 = Color3.fromRGB(15, 15, 15)
-	DropShadow.ImageTransparency = 0.5
+	DropShadow. Độ trong suốt của hình ảnh = 0,5
 	DropShadow.ScaleType = Enum.ScaleType.Slice
 	DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
-	DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-	DropShadow.BackgroundTransparency = 1
+	DropShadow.AnchorPoint = Vector2.new(0,5, 0,5)
+	DropShadow. Độ trong suốt của nền = 1
 	DropShadow.BorderSizePixel = 0
-	DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
-	DropShadow.Size = UDim2.new(1, 47, 1, 47)
+	DropShadow.Position = UDim2.new(0,5, 0, 0,5, 0)
+	DropShadow. Kích thước = UDim2. mới(1, 47, 1, 47)
 	DropShadow.ZIndex = 0
 	DropShadow.Name = "DropShadow"
 	DropShadow.Parent = DropShadowHolder
 
 	Main.AnchorPoint = Vector2.new(0.5, 0.5)
 	Main.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-	Main.BackgroundTransparency = 0.1
+	Main.BackgroundTransparency = 0,1
 	Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Main.BorderSizePixel = 0
-	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
-	Main.Size = UDim2.new(1, -47, 1, -47)
-	Main.Name = "Main"
+	Main.Position = UDim2.new(0,5, 0, 0,5, 0)
+	Kích thước chính = UDim2.new(1, -47, 1, -47)
+	Main.Name = "Chính"
 	Main.Parent = DropShadow
 
-	UICorner.Parent = Main
+	UICorner.Parent = Chính
 
 	UIStroke.Color = Color3.fromRGB(50, 50, 50)
-	UIStroke.Thickness = 1.600000023841858
-	UIStroke.Parent = Main
+	Độ dày UIStroke = 1.600000023841858
+	UIStroke.Parent = Chính
 
 	Top.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	Top.BackgroundTransparency = 0.9990000128746033
@@ -446,77 +446,77 @@ function CatLib:MakeGui(GuiConfig)
 	Top.BorderSizePixel = 0
 	Top.Size = UDim2.new(1, 0, 0, 38)
 	Top.Name = "Top"
-	Top.Parent = Main
+	Top.Parent = Chính
 
 	TextLabel.Font = Enum.Font.GothamBold
-	TextLabel.Text = GuiConfig.NameHub
+	Nhãn văn bản. Văn bản = GuiConfig. TênHub
 	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-	TextLabel.TextSize = 14
+	Nhãn văn bản.Kích thước văn bản = 14
 	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	TextLabel.BackgroundTransparency = 0.9990000128746033
-	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Nhãn văn bản.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.BackgroundTransparency = 0,9990000128746033
+	Nhãn văn bản.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextLabel.BorderSizePixel = 0
-	TextLabel.Size = UDim2.new(1, -100, 1, 0)
-	TextLabel.Position = UDim2.new(0, 10, 0, 0)
-	TextLabel.Parent = Top
+	Nhãn văn bản.Kích thước = UDim2.mới(1, -100, 1, 0)
+	Nhãn văn bản.Vị trí = UDim2.mới(0, 10, 0, 0)
+	TextLabel.Parent = Trên cùng
 
-	UICorner1.Parent = Top
+	UICorner1.Parent = Đầu trang
 
 	TextLabel1.Font = Enum.Font.GothamBold
-	TextLabel1.Text = GuiConfig.Description
+	TextLabel1.Text = GuiConfig.Mô ​​tả
 	TextLabel1.TextColor3 = GuiConfig.Color
-	TextLabel1.TextSize = 14
+	TextLabel1.Kích thước văn bản = 14
 	TextLabel1.TextXAlignment = Enum.TextXAlignment.Left
-	TextLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	TextLabel1.BackgroundTransparency = 0.9990000128746033
-	TextLabel1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Nhãn văn bản1.Màu nền3 = Màu3.từRGB(255, 255, 255)
+	TextLabel1.BackgroundTransparency = 0,9990000128746033
+	Nhãn văn bản1.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextLabel1.BorderSizePixel = 0
-	TextLabel1.Size = UDim2.new(1, -(TextLabel.TextBounds.X + 104), 1, 0)
+	TextLabel1.Kích thước = UDim2.mới(1, -(TextLabel.TextBounds.X + 104), 1, 0)
 	TextLabel1.Position = UDim2.new(0, TextLabel.TextBounds.X + 15, 0, 0)
-	TextLabel1.Parent = Top
+	TextLabel1.Parent = Trên cùng
 
 	UIStroke1.Color = GuiConfig.Color
-	UIStroke1.Thickness = 0.4000000059604645
-	UIStroke1.Parent = TextLabel1
+	UIStroke1.Độ dày = 0,4000000059604645
+	UIStroke1.Parent = Nhãn văn bản1
 
 	MaxRestore.Font = Enum.Font.SourceSans
 	MaxRestore.Text = ""
 	MaxRestore.TextColor3 = Color3.fromRGB(0, 0, 0)
-	MaxRestore.TextSize = 14
+	Kích thước văn bản MaxRestore = 14
 	MaxRestore.AnchorPoint = Vector2.new(1, 0.5)
 	MaxRestore.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	MaxRestore.BackgroundTransparency = 0.9990000128746033
+	MaxRestore. Độ trong suốt của nền = 0,9990000128746033
 	MaxRestore.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	MaxRestore.BorderSizePixel = 0
-	MaxRestore.Position = UDim2.new(1, -42, 0.5, 0)
-	MaxRestore.Size = UDim2.new(0, 25, 0, 25)
+	MaxRestore.Position = UDim2.new(1, -42, 0,5, 0)
+	Kích thước tối đa = UDim2.new(0, 25, 0, 25)
 	MaxRestore.Name = "MaxRestore"
-	MaxRestore.Parent = Top
+	MaxRestore.Parent = Đầu trang
 
 	ImageLabel.Image = "rbxassetid://9886659406"
 	ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
 	ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	ImageLabel.BackgroundTransparency = 0.9990000128746033
+	ImageLabel.BackgroundTransparency = 0,9990000128746033
 	ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	ImageLabel.BorderSizePixel = 0
-	ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
+	ImageLabel.Position = UDim2.new(0,5, 0, 0,5, 0)
 	ImageLabel.Size = UDim2.new(1, -8, 1, -8)
-	ImageLabel.Parent = MaxRestore
+	ImageLabel.Parent = Khôi phục tối đa
 
-	Close.Font = Enum.Font.SourceSans
-	Close.Text = ""
-	Close.TextColor3 = Color3.fromRGB(0, 0, 0)
-	Close.TextSize = 14
-	Close.AnchorPoint = Vector2.new(1, 0.5)
-	Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Close.BackgroundTransparency = 0.9990000128746033
-	Close.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Close.BorderSizePixel = 0
-	Close.Position = UDim2.new(1, -8, 0.5, 0)
-	Close.Size = UDim2.new(0, 25, 0, 25)
-	Close.Name = "Close"
-	Close.Parent = Top
+	Đóng.Font = Enum.Font.SourceSans
+	Đóng.Văn bản = ""
+	Đóng.TextColor3 = Color3.fromRGB(0, 0, 0)
+	Đóng.TextSize = 14
+	Đóng.AnchorPoint = Vector2.new(1, 0.5)
+	Đóng.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Đóng. Độ trong suốt của nền = 0,9990000128746033
+	Đóng.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Đóng. BorderSizePixel = 0
+	Đóng.Vị trí = UDim2.new(1, -8, 0,5, 0)
+	Đóng.Kích thước = UDim2.new(0, 25, 0, 25)
+	Close.Name = "Đóng"
+	Đóng.Cha = Đầu trang
 
 	ImageLabel1.Image = "rbxassetid://9886659671"
 	ImageLabel1.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -524,74 +524,74 @@ function CatLib:MakeGui(GuiConfig)
 	ImageLabel1.BackgroundTransparency = 0.9990000128746033
 	ImageLabel1.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	ImageLabel1.BorderSizePixel = 0
-	ImageLabel1.Position = UDim2.new(0.49, 0, 0.5, 0)
-	ImageLabel1.Size = UDim2.new(1, -8, 1, -8)
-	ImageLabel1.Parent = Close
+	ImageLabel1.Position = UDim2.new(0,49, 0, 0,5, 0)
+	ImageLabel1.Kích thước = UDim2.mới(1, -8, 1, -8)
+	ImageLabel1.Parent = Đóng
 
-	Min.Font = Enum.Font.SourceSans
+	Phông chữ tối thiểu = Enum.Font.SourceSans
 	Min.Text = ""
 	Min.TextColor3 = Color3.fromRGB(0, 0, 0)
-	Min.TextSize = 14
+	Kích thước văn bản tối thiểu = 14
 	Min.AnchorPoint = Vector2.new(1, 0.5)
 	Min.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Min.BackgroundTransparency = 0.9990000128746033
+	Tối thiểu. Độ trong suốt của nền = 0,9990000128746033
 	Min.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Min.BorderSizePixel = 0
-	Min.Position = UDim2.new(1, -78, 0.5, 0)
-	Min.Size = UDim2.new(0, 25, 0, 25)
-	Min.Name = "Min"
-	Min.Parent = Top
+	Vị trí tối thiểu = UDim2.new(1, -78, 0,5, 0)
+	Kích thước tối thiểu = UDim2.new(0, 25, 0, 25)
+	Min.Name = "Tối thiểu"
+	Min.Parent = Đầu trang
 
 	ImageLabel2.Image = "rbxassetid://9886659276"
-	ImageLabel2.AnchorPoint = Vector2.new(0.5, 0.5)
+	ImageLabel2.AnchorPoint = Vector2.new(0,5, 0,5)
 	ImageLabel2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	ImageLabel2.BackgroundTransparency = 0.9990000128746033
-	ImageLabel2.ImageTransparency = 0.2
+	ImageLabel2.BackgroundTransparency = 0,9990000128746033
+	ImageLabel2.ImageTransparency = 0,2
 	ImageLabel2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	ImageLabel2.BorderSizePixel = 0
-	ImageLabel2.Position = UDim2.new(0.5, 0, 0.5, 0)
+	ImageLabel2.Position = UDim2.new(0,5, 0, 0,5, 0)
 	ImageLabel2.Size = UDim2.new(1, -9, 1, -9)
 	ImageLabel2.Parent = Min
 
 	LayersTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	LayersTab.BackgroundTransparency = 0.9990000128746033
+	LayersTab.BackgroundTransparency = 0,9990000128746033
 	LayersTab.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	LayersTab.BorderSizePixel = 0
 	LayersTab.Position = UDim2.new(0, 9, 0, 50)
-	LayersTab.Size = UDim2.new(0, GuiConfig["Tab Width"], 1, -59)
+	LayersTab.Size = UDim2.new(0, GuiConfig["Chiều rộng tab"], 1, -59)
 	LayersTab.Name = "LayersTab"
-	LayersTab.Parent = Main
+	LayersTab.Parent = Chính
 
 	UICorner2.CornerRadius = UDim.new(0, 2)
 	UICorner2.Parent = LayersTab
 
 	DecideFrame.AnchorPoint = Vector2.new(0.5, 0)
 	DecideFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	DecideFrame.BackgroundTransparency = 0.85
+	DecideFrame. Độ trong suốt của Background = 0,85
 	DecideFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	DecideFrame.BorderSizePixel = 0
-	DecideFrame.Position = UDim2.new(0.5, 0, 0, 38)
+	DecideFrame.Position = UDim2.new(0,5, 0, 0, 38)
 	DecideFrame.Size = UDim2.new(1, 0, 0, 1)
-	DecideFrame.Name = "DecideFrame"
-	DecideFrame.Parent = Main
+	DecideFrame.Name = "Quyết định Khung"
+	DecideFrame.Parent = Chính
 
 	Layers.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Layers.BackgroundTransparency = 0.9990000128746033
+	Lớp. Độ trong suốt của nền = 0,9990000128746033
 	Layers.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Layers.BorderSizePixel = 0
-	Layers.Position = UDim2.new(0, GuiConfig["Tab Width"] + 18, 0, 50)
-	Layers.Size = UDim2.new(1, -(GuiConfig["Tab Width"] + 9 + 18), 1, -59)
-	Layers.Name = "Layers"
+	Lớp.BorderSizePixel = 0
+	Layers.Position = UDim2.new(0, GuiConfig["Chiều rộng tab"] + 18, 0, 50)
+	Layers.Size = UDim2.new(1, -(GuiConfig["Chiều rộng tab"] + 9 + 18), 1, -59)
+	Layers.Name = "Lớp"
 	Layers.Parent = Main
 
 	UICorner6.CornerRadius = UDim.new(0, 2)
-	UICorner6.Parent = Layers
+	UICorner6.Parent = Lớp
 
 	NameTab.Font = Enum.Font.GothamBold
-	NameTab.Text = ""
+	TênTab.Text = ""
 	NameTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 	NameTab.TextSize = 24
-	NameTab.TextWrapped = true
+	NameTab.TextWrapped = đúng
 	NameTab.TextXAlignment = Enum.TextXAlignment.Left
 	NameTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	NameTab.BackgroundTransparency = 0.9990000128746033
@@ -599,18 +599,18 @@ function CatLib:MakeGui(GuiConfig)
 	NameTab.BorderSizePixel = 0
 	NameTab.Size = UDim2.new(1, 0, 0, 30)
 	NameTab.Name = "NameTab"
-	NameTab.Parent = Layers
+	NameTab.Parent = Lớp
 
 	LayersReal.AnchorPoint = Vector2.new(0, 1)
 	LayersReal.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	LayersReal.BackgroundTransparency = 0.9990000128746033
+	LayersReal.BackgroundTransparency = 0,9990000128746033
 	LayersReal.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	LayersReal.BorderSizePixel = 0
-	LayersReal.ClipsDescendants = true
+	LayersReal.ClipsDescendants = đúng
 	LayersReal.Position = UDim2.new(0, 0, 1, 0)
 	LayersReal.Size = UDim2.new(1, 0, 1, -33)
 	LayersReal.Name = "LayersReal"
-	LayersReal.Parent = Layers
+	LayersReal.Parent = Lớp
 
 	LayersFolder.Name = "LayersFolder"
 	LayersFolder.Parent = LayersReal
@@ -618,88 +618,88 @@ function CatLib:MakeGui(GuiConfig)
 	LayersPageLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	LayersPageLayout.Name = "LayersPageLayout"
 	LayersPageLayout.Parent = LayersFolder
-	LayersPageLayout.TweenTime = 0.5
+	LayersPageLayout.TweenTime = 0,5
 	LayersPageLayout.EasingDirection = Enum.EasingDirection.InOut
 	LayersPageLayout.EasingStyle = Enum.EasingStyle.Quad
-	--// Layer Tabs
-local ScrollTab = Instance.new("ScrollingFrame")
-local UIListLayout = Instance.new("UIListLayout")
+	--// Tab lớp
+ScrollTab cục bộ = Instance.new("ScrollingFrame")
+UIListLayout cục bộ = Instance.new("UIListLayout")
 
--- Đặt kích thước lớn hơn
-ScrollTab.Size = UDim2.new(1, 0, 1, -20) -- Làm nó to hơn so với bản gốc
+-- Ä á·t kĂch thÆ°á»μc lá»***an hÆ¡n
+ScrollTab.Size = UDim2.new(1, 0, 1, -20) -- LĂm nĂn to hÆ¡n so vá»></i bạn £n gá»'c
 
--- Đổi màu thành trắng
-ScrollTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Màu trắng hoàn toàn
+-- Ä á»i mĂu thư sau
+ScrollTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- MĂu trát hoĂn toĂn
 ScrollTab.BackgroundTransparency = 0 -- Không trong suốt
 
--- Các thuộc tính khác giữ nguyên hoặc tùy chỉnh thêm
+-- CĂc thuá»™c tính khăc giá»¯ nguyĂn hoáồ·c teĂ¹y chá»‰nh thom
 ScrollTab.CanvasSize = UDim2.new(0, 0, 1.1, 0)
 ScrollTab.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
 ScrollTab.ScrollBarThickness = 0
-ScrollTab.Active = true
+ScrollTab.Active = đúng
 ScrollTab.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ScrollTab.BorderSizePixel = 0
 ScrollTab.Name = "ScrollTab"
 ScrollTab.Parent = LayersTab
 
--- Thiết lập UIListLayout
+-- Đánh rơi UIListLayout
 UIListLayout.Padding = UDim.new(0, 3)
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Parent = ScrollTab
+UIListLayout.Parent = CuộnTab
 
-	local function UpdateSize1()
-		local OffsetY = 0
-		for _, child in ScrollTab:GetChildren() do
-			if child.Name ~= "UIListLayout" then
+	hàm cục bộ UpdateSize1()
+		OffsetY cục bộ = 0
+		đối với _, con trong ScrollTab:GetChildren() làm
+			nếu child.Name ~= "UIListLayout" thì
 				OffsetY = OffsetY + 3 + child.Size.Y.Offset
-			end
-		end
+			kết thúc
+		kết thúc
 		ScrollTab.CanvasSize = UDim2.new(0, 0, 0, OffsetY)
-	end
-	ScrollTab.ChildAdded:Connect(UpdateSize1)
-	ScrollTab.ChildRemoved:Connect(UpdateSize1)
+	kết thúc
+	ScrollTab.ChildAdded:Kết nối(UpdateSize1)
+	ScrollTab.ChildRemoved:Kết nối(UpdateSize1)
 
-	local Info = Instance.new("Frame");
-	local UICorner = Instance.new("UICorner");
-	local LogoPlayerFrame = Instance.new("Frame")
-	local UICorner1 = Instance.new("UICorner");
-	local LogoPlayer = Instance.new("ImageLabel");
-	local UICorner2 = Instance.new("UICorner");
-	local NamePlayer = Instance.new("TextLabel");
+	Thông tin cục bộ = Instance.new("Khung");
+	UICorner cục bộ = Instance.new("UICorner");
+	LogoPlayerFrame cục bộ = Instance.new("Frame")
+	UICorner1 cục bộ = Instance.new("UICorner");
+	LogoPlayer cục bộ = Instance.new("ImageLabel");
+	UICorner2 cục bộ = Instance.new("UICorner");
+	NamePlayer cục bộ = Instance.new("TextLabel");
 		
 	Info.AnchorPoint = Vector2.new(1, 1)
 	Info.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Info.BackgroundTransparency = 0.95
+	Info.BackgroundTransparency = 0,95
 	Info.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Info.BorderSizePixel = 0
-	Info.Position = UDim2.new(1, 0, 1, 0)
-	Info.Size = UDim2.new(1, 0, 0, 40)
-	Info.Name = "Info"
-	Info.Parent = LayersTab
+	Thông tin.Vị trí = UDim2.new(1, 0, 1, 0)
+	Thông tin.Kích thước = UDim2.new(1, 0, 0, 40)
+	Info.Name = "Thông tin"
+	Thông tin.Cha = LayersTab
 
 	UICorner.CornerRadius = UDim.new(0, 5)
-	UICorner.Parent = Info
+	UICorner.Parent = Thông tin
 
 	LogoPlayerFrame.AnchorPoint = Vector2.new(0, 0.5)
 	LogoPlayerFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	LogoPlayerFrame.BackgroundTransparency = 0.95
+	LogoPlayerFrame.BackgroundTransparency = 0,95
 	LogoPlayerFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	LogoPlayerFrame.BorderSizePixel = 0
-	LogoPlayerFrame.Position = UDim2.new(0, 5, 0.5, 0)
+	LogoPlayerFrame.Position = UDim2.new(0, 5, 0,5, 0)
 	LogoPlayerFrame.Size = UDim2.new(0, 30, 0, 30)
 	LogoPlayerFrame.Name = "LogoPlayerFrame"
-	LogoPlayerFrame.Parent = Info
+	LogoPlayerFrame.Parent = Thông tin
 
 	UICorner1.CornerRadius = UDim.new(0, 1000)
 	UICorner1.Parent = LogoPlayerFrame
 
-	LogoPlayer.Image = GuiConfig["Logo Player"]
+	LogoPlayer.Image = GuiConfig["Trình phát Logo"]
 	LogoPlayer.AnchorPoint = Vector2.new(0.5, 0.5)
 	LogoPlayer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	LogoPlayer.BackgroundTransparency = 0.999
+	LogoPlayer.BackgroundTransparency = 0,999
 	LogoPlayer.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	LogoPlayer.BorderSizePixel = 0
-	LogoPlayer.Position = UDim2.new(0.5, 0, 0.5, 0)
+	LogoPlayer.Position = UDim2.new(0,5, 0, 0,5, 0)
 	LogoPlayer.Size = UDim2.new(1, -5, 1, -5)
 	LogoPlayer.Name = "LogoPlayer"
 	LogoPlayer.Parent = LogoPlayerFrame
@@ -708,229 +708,229 @@ UIListLayout.Parent = ScrollTab
 	UICorner2.Parent = LogoPlayer
 
 	NamePlayer.Font = Enum.Font.GothamBold
-	NamePlayer.Text = GuiConfig["Name Player"]
+	NamePlayer.Text = GuiConfig["Tên người chơi"]
 	NamePlayer.TextColor3 = Color3.fromRGB(230.00000149011612, 230.00000149011612, 230.00000149011612)
-	NamePlayer.TextSize = 12
-	NamePlayer.TextWrapped = true
+	TênPlayer.TextSize = 12
+	NamePlayer.TextWrapped = đúng
 	NamePlayer.TextXAlignment = Enum.TextXAlignment.Left
 	NamePlayer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	NamePlayer.BackgroundTransparency = 0.9990000128746033
 	NamePlayer.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	NamePlayer.BorderSizePixel = 0
+	TênPlayer.BorderSizePixel = 0
 	NamePlayer.Position = UDim2.new(0, 40, 0, 0)
 	NamePlayer.Size = UDim2.new(1, -45, 1, 0)
 	NamePlayer.Name = "NamePlayer"
-	NamePlayer.Parent = Info
+	NamePlayer.Parent = Thông tin
 
-	function GuiFunc:DestroyGui()
-		if CoreGui:FindFirstChild("HirimiGui") then 
-			HirimiGui:Destroy()
-		end
-	end
-	local OldPos = DropShadowHolder.Position
-	local OldSize = DropShadowHolder.Size
-	MaxRestore.Activated:Connect(function()
-		CircleClick(MaxRestore, Mouse.X, Mouse.Y)
-		if ImageLabel.Image == "rbxassetid://9886659406" then
+	hàm GuiFunc:DestroyGui()
+		nếu CoreGui:FindFirstChild("HirimiGui") thì
+			HirimiGui:Phá hủy()
+		kết thúc
+	kết thúc
+	OldPos cục bộ = DropShadowHolder.Position
+	OldSize cục bộ = DropShadowHolder.Size
+	MaxRestore.Activated:Kết nối(hàm()
+		CircleClick(MaxRestore, Chuột.X, Chuột.Y)
+		nếu ImageLabel.Image == "rbxassetid://9886659406" thì
 			ImageLabel.Image = "rbxassetid://9886659001"
-			OldPos = DropShadowHolder.Position
-			OldSize = DropShadowHolder.Size
-			TweenService:Create(DropShadowHolder, TweenInfo.new(0.3), {Position = UDim2.new(0, 0, 0, 0)}):Play()
-			TweenService:Create(DropShadowHolder, TweenInfo.new(0.3), {Size = UDim2.new(1, 0, 1, 0)}):Play()
-		else
+			OldPos = DropShadowHolder.Vị trí
+			Kích thước cũ = DropShadowHolder. Kích thước
+			TweenService:Tạo(DropShadowHolder, TweenInfo.new(0.3), {Vị trí = UDim2.new(0, 0, 0, 0)}):Phát()
+			TweenService:Tạo(DropShadowHolder, TweenInfo.new(0.3), {Kích thước = UDim2.new(1, 0, 1, 0)}):Phát()
+		khác
 			ImageLabel.Image = "rbxassetid://9886659406"
-			TweenService:Create(DropShadowHolder, TweenInfo.new(0.3), {Position = OldPos}):Play()
-			TweenService:Create(DropShadowHolder, TweenInfo.new(0.3), {Size = OldSize}):Play()
-		end
-	end)
-	Min.Activated:Connect(function()
-		CircleClick(Min, Mouse.X, Mouse.Y)
-		DropShadowHolder.Visible = false
-	end)
-	Close.Activated:Connect(function()
-		CircleClick(Close, Mouse.X, Mouse.Y)
-		DropShadowHolder.Visible = false
-	end)
-	function GuiFunc:ToggleUI()
-        game:GetService("VirtualInputManager"):SendKeyEvent(true, "RightShift",false,game)
-        game:GetService("VirtualInputManager"):SendKeyEvent(false, "RightShift",false,game)
-	end
-	UserInputService.InputBegan:Connect(function(input)
-		if input.KeyCode == Enum.KeyCode.RightShift then
-			if DropShadowHolder.Visible then
-				DropShadowHolder.Visible = false
-			else
-				DropShadowHolder.Visible = true
-			end
-		end
-	end)
+			TweenService:Tạo(DropShadowHolder, TweenInfo.new(0.3), {Vị trí = OldPos}):Phát()
+			TweenService:Create(DropShadowHolder, TweenInfo.new(0.3), {Kích thước = OldSize}):Play()
+		kết thúc
+	kết thúc)
+	Min.Kích hoạt:Kết nối(hàm()
+		CircleClick(Min, Chuột.X, Chuột.Y)
+		DropShadowHolder.Visible = sai
+	kết thúc)
+	Đóng.Kích hoạt:Kết nối(hàm()
+		CircleClick(Đóng, Chuột.X, Chuột.Y)
+		DropShadowHolder.Visible = sai
+	kết thúc)
+	hàm GuiFunc:ToggleUI()
+        trò chơi: GetService("VirtualInputManager"):SendKeyEvent(đúng, "RightShift",sai,trò chơi)
+        trò chơi: GetService("VirtualInputManager"):SendKeyEvent(false, "RightShift",false, trò chơi)
+	kết thúc
+	UserInputService.InputBegan:Connect(hàm(đầu vào)
+		nếu input.KeyCode == Enum.KeyCode.RightShift thì
+			nếu DropShadowHolder.Visible thì
+				DropShadowHolder.Visible = sai
+			khác
+				DropShadowHolder.Visible = đúng
+			kết thúc
+		kết thúc
+	kết thúc)
 	DropShadowHolder.Size = UDim2.new(0, 115 + TextLabel.TextBounds.X + 1 + TextLabel1.TextBounds.X, 0, 350)
-	MakeDraggable(Top, DropShadowHolder)
-	--// Blur
-	local MoreBlur = Instance.new("Frame");
-	local DropShadowHolder1 = Instance.new("Frame");
-	local DropShadow1 = Instance.new("ImageLabel");
-	local UICorner28 = Instance.new("UICorner");
-	local ConnectButton = Instance.new("TextButton");
+	MakeDraggable(Trên cùng, DropShadowHolder)
+	--// Làm mờ
+	MoreBlur cục bộ = Instance.new("Khung");
+	DropShadowHolder1 cục bộ = Instance.new("Frame");
+	DropShadow1 cục bộ = Instance.new("ImageLabel");
+	UICorner28 cục bộ = Instance.new("UICorner");
+	ConnectButton cục bộ = Instance.new("TextButton");
 	
 	MoreBlur.AnchorPoint = Vector2.new(1, 1)
 	MoreBlur.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	MoreBlur.BackgroundTransparency = 0.999
+	MoreBlur.BackgroundTransparency = 0,999
 	MoreBlur.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	MoreBlur.BorderSizePixel = 0
-	MoreBlur.ClipsDescendants = true
+	MoreBlur.ClipsDescendants = đúng
 	MoreBlur.Position = UDim2.new(1, 8, 1, 8)
 	MoreBlur.Size = UDim2.new(1, 154, 1, 54)
-	MoreBlur.Visible = false
+	MoreBlur.Visible = sai
 	MoreBlur.Name = "MoreBlur"
-	MoreBlur.Parent = Layers
+	MoreBlur.Parent = Lớp
 
-	DropShadowHolder1.BackgroundTransparency = 1
+	DropShadowHolder1. Độ trong suốt của Background = 1
 	DropShadowHolder1.BorderSizePixel = 0
 	DropShadowHolder1.Size = UDim2.new(1, 0, 1, 0)
 	DropShadowHolder1.ZIndex = 0
-	DropShadowHolder1.Name = "DropShadowHolder"
-	DropShadowHolder1.Parent = MoreBlur
+	DropShadowHolder1.Tên = "DropShadowHolder"
+	DropShadowHolder1.Parent = Làm mờ thêm
 
 	DropShadow1.Image = "rbxassetid://6015897843"
 	DropShadow1.ImageColor3 = Color3.fromRGB(0, 0, 0)
-	DropShadow1.ImageTransparency = 0.5
+	DropShadow1. Độ trong suốt của hình ảnh = 0,5
 	DropShadow1.ScaleType = Enum.ScaleType.Slice
 	DropShadow1.SliceCenter = Rect.new(49, 49, 450, 450)
-	DropShadow1.AnchorPoint = Vector2.new(0.5, 0.5)
-	DropShadow1.BackgroundTransparency = 1
+	DropShadow1.AnchorPoint = Vector2.new(0,5, 0,5)
+	DropShadow1. Độ trong suốt của nền = 1
 	DropShadow1.BorderSizePixel = 0
-	DropShadow1.Position = UDim2.new(0.5, 0, 0.5, 0)
-	DropShadow1.Size = UDim2.new(1, 35, 1, 35)
+	DropShadow1.Position = UDim2.new(0,5, 0, 0,5, 0)
+	DropShadow1.Kích thước = UDim2.mới(1, 35, 1, 35)
 	DropShadow1.ZIndex = 0
 	DropShadow1.Name = "DropShadow"
 	DropShadow1.Parent = DropShadowHolder1
 
-	UICorner28.Parent = MoreBlur
+	UICorner28.Parent = Làm mờ thêm
 
 	ConnectButton.Font = Enum.Font.SourceSans
-	ConnectButton.Text = ""
+	Nút Kết nối. Văn bản = ""
 	ConnectButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-	ConnectButton.TextSize = 14
+	ConnectButton.Kích thước văn bản = 14
 	ConnectButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	ConnectButton.BackgroundTransparency = 0.999
+	ConnectButton.BackgroundTransparency = 0,999
 	ConnectButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	ConnectButton.BorderSizePixel = 0
 	ConnectButton.Size = UDim2.new(1, 0, 1, 0)
-	ConnectButton.Name = "ConnectButton"
-	ConnectButton.Parent = MoreBlur
+	ConnectButton.Name = "Nút kết nối"
+	ConnectButton.Parent = Làm mờ thêm
 
-	local DropdownSelect = Instance.new("Frame");
-	local UICorner36 = Instance.new("UICorner");
-	local UIStroke14 = Instance.new("UIStroke");
-	local DropdownSelectReal = Instance.new("Frame");
-	local DropdownFolder = Instance.new("Folder");
-	local DropPageLayout = Instance.new("UIPageLayout");
+	DropdownSelect cục bộ = Instance.new("Frame");
+	UICorner36 cục bộ = Instance.new("UICorner");
+	UIStroke14 cục bộ = Instance.new("UIStroke");
+	DropdownSelectReal cục bộ = Instance.new("Frame");
+	DropdownFolder cục bộ = Instance.new("Thư mục");
+	DropPageLayout cục bộ = Instance.new("UIPageLayout");
 
 	DropdownSelect.AnchorPoint = Vector2.new(1, 0.5)
 	DropdownSelect.BackgroundColor3 = Color3.fromRGB(30.00000011175871, 30.00000011175871, 30.00000011175871)
 	DropdownSelect.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	DropdownSelect.BorderSizePixel = 0
 	DropdownSelect.LayoutOrder = 1
-	DropdownSelect.Position = UDim2.new(1, 172, 0.5, 0)
+	DropdownSelect.Position = UDim2.new(1, 172, 0,5, 0)
 	DropdownSelect.Size = UDim2.new(0, 160, 1, -16)
 	DropdownSelect.Name = "DropdownSelect"
-	DropdownSelect.ClipsDescendants = true
-	DropdownSelect.Parent = MoreBlur
+	DropdownSelect.ClipsDescendants = đúng
+	DropdownSelect.Parent = Thêm mờ
 
-	ConnectButton.Activated:Connect(function()
-		if MoreBlur.Visible then
+	ConnectButton.Activated:Kết nối(hàm()
+		nếu MoreBlur.Visible thì
 			TweenService:Create(MoreBlur, TweenInfo.new(0.3), {BackgroundTransparency = 0.999}):Play()
 			TweenService:Create(DropdownSelect, TweenInfo.new(0.3), {Position = UDim2.new(1, 172, 0.5, 0)}):Play()
 			task.wait(0.3)
-			MoreBlur.Visible = false
-		end
-	end)
+			MoreBlur.Visible = sai
+		kết thúc
+	kết thúc)
 	UICorner36.CornerRadius = UDim.new(0, 3)
 	UICorner36.Parent = DropdownSelect
 
 	UIStroke14.Color = Color3.fromRGB(255, 255, 255)
-	UIStroke14.Thickness = 2.5
-	UIStroke14.Transparency = 0.8
+	UIStroke14.Độ dày = 2,5
+	UIStroke14. Độ trong suốt = 0,8
 	UIStroke14.Parent = DropdownSelect
 
 	DropdownSelectReal.AnchorPoint = Vector2.new(0.5, 0.5)
 	DropdownSelectReal.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	DropdownSelectReal.BackgroundTransparency = 0.9990000128746033
+	DropdownSelectReal.BackgroundTransparency = 0,9990000128746033
 	DropdownSelectReal.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	DropdownSelectReal.BorderSizePixel = 0
 	DropdownSelectReal.LayoutOrder = 1
-	DropdownSelectReal.Position = UDim2.new(0.5, 0, 0.5, 0)
+	DropdownSelectReal.Position = UDim2.new(0,5, 0, 0,5, 0)
 	DropdownSelectReal.Size = UDim2.new(1, -10, 1, -10)
 	DropdownSelectReal.Name = "DropdownSelectReal"
 	DropdownSelectReal.Parent = DropdownSelect
 
-	DropdownFolder.Name = "DropdownFolder"
+	DropdownFolder.Name = "Thư mục thả xuống"
 	DropdownFolder.Parent = DropdownSelectReal
 
 	DropPageLayout.EasingDirection = Enum.EasingDirection.InOut
 	DropPageLayout.EasingStyle = Enum.EasingStyle.Quad
-	DropPageLayout.TweenTime = 0.009999999776482582
+	DropPageLayout.TweenTime = 0,009999999776482582
 	DropPageLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	DropPageLayout.Archivable = false
-	DropPageLayout.Name = "DropPageLayout"
-	DropPageLayout.Parent = DropdownFolder
-	--// Tabs
-	local Tabs = {}
-	local CountTab = 0
-	local CountDropdown = 0
-	function Tabs:CreateTab(TabConfig)
-		local TabConfig = TabConfig or {}
-		TabConfig.Name = TabConfig.Name or "Tab"
-		TabConfig.Icon = TabConfig.Icon or ""
+	DropPageLayout.Archivable = sai
+	DropPageLayout.Tên = "DropPageLayout"
+	DropPageLayout.Parent = Thư mục thả xuống
+	--// Các tab
+	Tab cục bộ = {}
+	CountTab cục bộ = 0
+	CountDropdown cục bộ = 0
+	chức năng Tabs:CreateTab(TabConfig)
+		TabConfig cục bộ = TabConfig hoặc {}
+		TabConfig.Name = TabConfig.Name hoặc "Tab"
+		TabConfig.Icon = TabConfig.Icon hoặc ""
 
-		local ScrolLayers = Instance.new("ScrollingFrame");
-		local UIListLayout1 = Instance.new("UIListLayout");
+		ScrolLayers cục bộ = Instance.new("ScrollingFrame");
+		UIListLayout1 cục bộ = Instance.new("UIListLayout");
 
 		ScrolLayers.ScrollBarImageColor3 = Color3.fromRGB(80.00000283122063, 80.00000283122063, 80.00000283122063)
 		ScrolLayers.ScrollBarThickness = 0
-		ScrolLayers.Active = true
-		ScrolLayers.LayoutOrder = CountTab
+		ScrolLayers.Active = đúng
+		ScrolLayers.LayoutOrder = ĐếmTab
 		ScrolLayers.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		ScrolLayers.BackgroundTransparency = 0.9990000128746033
+		ScrolLayers.BackgroundTransparency = 0,9990000128746033
 		ScrolLayers.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		ScrolLayers.BorderSizePixel = 0
 		ScrolLayers.Size = UDim2.new(1, 0, 1, 0)
 		ScrolLayers.Name = "ScrolLayers"
-		ScrolLayers.Parent = LayersFolder
+		ScrolLayers.Parent = Thư mục lớp
 
 		UIListLayout1.Padding = UDim.new(0, 3)
 		UIListLayout1.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout1.Parent = ScrolLayers
+		UIListLayout1.Parent = Lớp cuộn
 
-		local Tab = Instance.new("Frame");
-		local UICorner3 = Instance.new("UICorner");
-		local TabButton = Instance.new("TextButton");
-		local TabName = Instance.new("TextLabel")
-		local FeatureImg = Instance.new("ImageLabel");
-		local UIStroke2 = Instance.new("UIStroke");
-		local UICorner4 = Instance.new("UICorner");
+		Tab cục bộ = Instance.new("Khung");
+		UICorner3 cục bộ = Instance.new("UICorner");
+		TabButton cục bộ = Instance.new("TextButton");
+		TabName cục bộ = Instance.new("TextLabel")
+		cục bộ FeatureImg = Instance.new("ImageLabel");
+		UIStroke2 cục bộ = Instance.new("UIStroke");
+		UICorner4 cục bộ = Instance.new("UICorner");
 
 		Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		if CountTab == 0 then
-			Tab.BackgroundTransparency = 0.9200000166893005
-		else
+		nếu CountTab == 0 thì
+			Tab. Độ trong suốt của nền = 0,9200000166893005
+		khác
 			Tab.BackgroundTransparency = 0.9990000128746033
-		end
+		kết thúc
 		Tab.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Tab.BorderSizePixel = 0
-		Tab.LayoutOrder = CountTab
-		Tab.Size = UDim2.new(1, 0, 0, 30)
+		Tab.LayoutOrder = ĐếmTab
+		Tab.Kích thước = UDim2.new(1, 0, 0, 30)
 		Tab.Name = "Tab"
-		Tab.Parent = ScrollTab
+		Tab.Parent = CuộnTab
 
 		UICorner3.CornerRadius = UDim.new(0, 4)
 		UICorner3.Parent = Tab
 
 		TabButton.Font = Enum.Font.GothamBold
-		TabButton.Text = ""
+		TabButton. Văn bản = ""
 		TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TabButton.TextSize = 13
+		TabButton.Kích thước văn bản = 13
 		TabButton.TextXAlignment = Enum.TextXAlignment.Left
 		TabButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		TabButton.BackgroundTransparency = 0.9990000128746033
@@ -943,7 +943,7 @@ UIListLayout.Parent = ScrollTab
 		TabName.Font = Enum.Font.GothamBold
 		TabName.Text = TabConfig.Name
 		TabName.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TabName.TextSize = 13
+		TabName.Kích thước văn bản = 13
 		TabName.TextXAlignment = Enum.TextXAlignment.Left
 		TabName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		TabName.BackgroundTransparency = 0.9990000128746033
@@ -956,106 +956,106 @@ UIListLayout.Parent = ScrollTab
 
 		FeatureImg.Image = TabConfig.Icon
 		FeatureImg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		FeatureImg.BackgroundTransparency = 0.9990000128746033
+		FeatureImg.BackgroundTransparency = 0,9990000128746033
 		FeatureImg.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		FeatureImg.BorderSizePixel = 0
 		FeatureImg.Position = UDim2.new(0, 9, 0, 7)
 		FeatureImg.Size = UDim2.new(0, 16, 0, 16)
 		FeatureImg.Name = "FeatureImg"
 		FeatureImg.Parent = Tab
-		if CountTab == 0 then
-			LayersPageLayout:JumpToIndex(0)
+		nếu CountTab == 0 thì
+			LayersPageLayout:Nhảy tới chỉ mục(0)
 			NameTab.Text = TabConfig.Name
-			local ChooseFrame = Instance.new("Frame");
-			ChooseFrame.BackgroundColor3 = GuiConfig.Color
-			ChooseFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ChooseFrame.BorderSizePixel = 0
-			ChooseFrame.Position = UDim2.new(0, 2, 0, 9)
-			ChooseFrame.Size = UDim2.new(0, 1, 0, 12)
-			ChooseFrame.Name = "ChooseFrame"
-			ChooseFrame.Parent = Tab
+			cục bộ ChooseFrame = Instance.new("Frame");
+			ChọnFrame.BackgroundColor3 = GuiConfig.Color
+			ChọnFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			ChọnFrame.BorderSizePixel = 0
+			Chọn Khung.Vị trí = UDim2.mới(0, 2, 0, 9)
+			Chọn Frame.Size = UDim2.new(0, 1, 0, 12)
+			ChooseFrame.Name = "Chọn Khung"
+			ChọnFrame.Parent = Tab
 
 			UIStroke2.Color = GuiConfig.Color
-			UIStroke2.Thickness = 1.600000023841858
-			UIStroke2.Parent = ChooseFrame
+			Độ dày UIStroke2 = 1.600000023841858
+			UIStroke2.Parent = Chọn Khung
 
-			UICorner4.Parent = ChooseFrame
-		end
-		TabButton.Activated:Connect(function()
-			CircleClick(TabButton, Mouse.X, Mouse.Y)
-			local FrameChoose
-			for a, s in ScrollTab:GetChildren() do
-				for i, v in s:GetChildren() do
-					if v.Name == "ChooseFrame" then
-						FrameChoose = v
-						break
-					end
-				end
-			end
-			if FrameChoose ~= nil and Tab.LayoutOrder ~= LayersPageLayout.CurrentPage.LayoutOrder then
-				for _, TabFrame in ScrollTab:GetChildren() do
-					if TabFrame.Name == "Tab" then
-						TweenService:Create(
-							TabFrame,
+			UICorner4.Parent = Chọn Khung
+		kết thúc
+		TabButton.Activated:Kết nối(hàm()
+			CircleClick(TabButton, Chuột.X, Chuột.Y)
+			FrameChoose cục bộ
+			đối với a, s trong ScrollTab:GetChildren() thực hiện
+				đối với i, v trong s:GetChildren() thực hiện
+					nếu v.Name == "ChooseFrame" thì
+						KhungChọn = v
+						phá vỡ
+					kết thúc
+				kết thúc
+			kết thúc
+			nếu FrameChoose ~= nil và Tab.LayoutOrder ~= LayersPageLayout.CurrentPage.LayoutOrder thì
+				đối với _, TabFrame trong ScrollTab:GetChildren() thực hiện
+					nếu TabFrame.Name == "Tab" thì
+						TweenService:Tạo(
+							Khung Tab,
 							TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-							{BackgroundTransparency = 0.9990000128746033}
-						):Play()
-					end    
-				end
-				TweenService:Create(
-					Tab,
+							{Độ trong suốt của nền = 0,9990000128746033}
+						):Chơi()
+					kết thúc    
+				kết thúc
+				TweenService:Tạo(
+					Thẻ,
 					TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-					{BackgroundTransparency = 0.9200000166893005}
-				):Play()
-				TweenService:Create(
-					FrameChoose,
+					{Độ trong suốt của nền = 0,9200000166893005}
+				):Chơi()
+				TweenService:Tạo(
+					KhungChọn,
 					TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-					{Position = UDim2.new(0, 2, 0, 9 + (33 * Tab.LayoutOrder))}
-				):Play()
-				LayersPageLayout:JumpToIndex(Tab.LayoutOrder)
+					{Vị trí = UDim2.new(0, 2, 0, 9 + (33 * Tab.LayoutOrder))}
+				):Chơi()
+				LayersPageLayout: Nhảy tới chỉ mục (Tab.LayoutOrder)
 				task.wait(0.05)
 				NameTab.Text = TabConfig.Name
-				TweenService:Create(
-					FrameChoose,
+				TweenService:Tạo(
+					KhungChọn,
 					TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-					{Size = UDim2.new(0, 1, 0, 20)}
-				):Play()
+					{Kích thước = UDim2.new(0, 1, 0, 20)}
+				):Chơi()
 				task.wait(0.2)
-				TweenService:Create(
-					FrameChoose,
+				TweenService:Tạo(
+					KhungChọn,
 					TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-					{Size = UDim2.new(0, 1, 0, 12)}
-				):Play()
-			end
-		end)
-		--// Section 
-		local Sections = {}
-		local CountSection = 0
-		function Sections:AddSection(Title)
-			local Title = Title or "Title"
-			local Section = Instance.new("Frame");
-			local SectionDecideFrame = Instance.new("Frame");
-			local UICorner1 = Instance.new("UICorner");
-			local UIGradient = Instance.new("UIGradient");
+					{Kích thước = UDim2.new(0, 1, 0, 12)}
+				):Chơi()
+			kết thúc
+		kết thúc)
+		--// Phần
+		Các phần cục bộ = {}
+		CountSection cục bộ = 0
+		chức năng Sections:AddSection(Title)
+			Tiêu đề cục bộ = Tiêu đề hoặc "Tiêu đề"
+			Phần cục bộ = Instance.new("Khung");
+			cục bộ SectionDecideFrame = Instance.new("Frame");
+			UICorner1 cục bộ = Instance.new("UICorner");
+			UIGradient cục bộ = Instance.new("UIGradient");
 
-			Section.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Section.BackgroundTransparency = 0.9990000128746033
+			Phần.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Phần.Bối cảnh Độ trong suốt = 0,9990000128746033
 			Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Section.BorderSizePixel = 0
-			Section.LayoutOrder = CountSection
-			Section.ClipsDescendants = true
+			Phần.BorderSizePixel = 0
+			Section.LayoutOrder = Số lượng phần
+			Section.ClipsDescendants = đúng
 			Section.LayoutOrder = 1
-			Section.Size = UDim2.new(1, 0, 0, 30)
-			Section.Name = "Section"
-			Section.Parent = ScrolLayers
+			Phần.Kích thước = UDim2.new(1, 0, 0, 30)
+			Section.Name = "Phần"
+			Phần.Cha = ScrolLayers
 
-			local SectionReal = Instance.new("Frame");
-			local UICorner = Instance.new("UICorner");
-			local UIStroke = Instance.new("UIStroke");
-			local SectionButton = Instance.new("TextButton");
-			local FeatureFrame = Instance.new("Frame");
-			local FeatureImg = Instance.new("ImageLabel");
-			local SectionTitle = Instance.new("TextLabel");
+			cục bộ SectionReal = Instance.new("Frame");
+			UICorner cục bộ = Instance.new("UICorner");
+			UIStroke cục bộ = Instance.new("UIStroke");
+			SectionButton cục bộ = Instance.new("TextButton");
+			FeatureFrame cục bộ = Instance.new("Khung");
+			cục bộ FeatureImg = Instance.new("ImageLabel");
+			SectionTitle cục bộ = Instance.new("TextLabel");
 
 			SectionReal.AnchorPoint = Vector2.new(0.5, 0)
 			SectionReal.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1063,20 +1063,20 @@ UIListLayout.Parent = ScrollTab
 			SectionReal.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			SectionReal.BorderSizePixel = 0
 			SectionReal.LayoutOrder = 1
-			SectionReal.Position = UDim2.new(0.5, 0, 0, 0)
+			SectionReal.Position = UDim2.new(0,5, 0, 0)
 			SectionReal.Size = UDim2.new(1, 1, 0, 30)
 			SectionReal.Name = "SectionReal"
-			SectionReal.Parent = Section
+			SectionReal.Parent = Phần
 
 			UICorner.CornerRadius = UDim.new(0, 4)
 			UICorner.Parent = SectionReal
 
 			SectionButton.Font = Enum.Font.SourceSans
 			SectionButton.Text = ""
-			SectionButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+			MụcButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 			SectionButton.TextSize = 14
 			SectionButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			SectionButton.BackgroundTransparency = 0.9990000128746033
+			SectionButton.BackgroundTransparency = 0,9990000128746033
 			SectionButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			SectionButton.BorderSizePixel = 0
 			SectionButton.Size = UDim2.new(1, 0, 1, 0)
@@ -1085,50 +1085,50 @@ UIListLayout.Parent = ScrollTab
 
 			FeatureFrame.AnchorPoint = Vector2.new(1, 0.5)
 			FeatureFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-			FeatureFrame.BackgroundTransparency = 0.9990000128746033
+			FeatureFrame.BackgroundTransparency = 0,9990000128746033
 			FeatureFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			FeatureFrame.BorderSizePixel = 0
-			FeatureFrame.Position = UDim2.new(1, -5, 0.5, 0)
+			FeatureFrame.Position = UDim2.new(1, -5, 0,5, 0)
 			FeatureFrame.Size = UDim2.new(0, 20, 0, 20)
 			FeatureFrame.Name = "FeatureFrame"
 			FeatureFrame.Parent = SectionReal
 
 			FeatureImg.Image = "rbxassetid://16851841101"
-			FeatureImg.AnchorPoint = Vector2.new(0.5, 0.5)
+			FeatureImg.AnchorPoint = Vector2.new(0,5, 0,5)
 			FeatureImg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			FeatureImg.BackgroundTransparency = 0.9990000128746033
+			FeatureImg.BackgroundTransparency = 0,9990000128746033
 			FeatureImg.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			FeatureImg.BorderSizePixel = 0
-			FeatureImg.Position = UDim2.new(0.5, 0, 0.5, 0)
+			FeatureImg.Position = UDim2.new(0,5, 0, 0,5, 0)
 			FeatureImg.Rotation = -90
 			FeatureImg.Size = UDim2.new(1, 6, 1, 6)
 			FeatureImg.Name = "FeatureImg"
 			FeatureImg.Parent = FeatureFrame
 
-			SectionTitle.Font = Enum.Font.GothamBold
-			SectionTitle.Text = Title
-			SectionTitle.TextColor3 = Color3.fromRGB(230.77499270439148, 230.77499270439148, 230.77499270439148)
-			SectionTitle.TextSize = 13
+			Tiêu đề phần.Font = Enum.Font.GothamBold
+			SectionTitle.Text = Tiêu đề
+			MụcTitle.TextColor3 = Color3.fromRGB(230.77499270439148, 230.77499270439148, 230.77499270439148)
+			Tiêu đề phần.Kích thước văn bản = 13
 			SectionTitle.TextXAlignment = Enum.TextXAlignment.Left
 			SectionTitle.TextYAlignment = Enum.TextYAlignment.Top
-			SectionTitle.AnchorPoint = Vector2.new(0, 0.5)
-			SectionTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			SectionTitle.BackgroundTransparency = 0.9990000128746033
-			SectionTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			SectionTitle.BorderSizePixel = 0
-			SectionTitle.Position = UDim2.new(0, 10, 0.5, 0)
-			SectionTitle.Size = UDim2.new(1, -50, 0, 13)
-			SectionTitle.Name = "SectionTitle"
+			Tiêu đề mục.AnchorPoint = Vector2.new(0, 0.5)
+			Tiêu đề phần.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Tiêu đề phần. Độ trong suốt của nền = 0,9990000128746033
+			Tiêu đề phần.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Tiêu đề phần.BorderSizePixel = 0
+			SectionTitle.Position = UDim2.new(0, 10, 0,5, 0)
+			Tiêu đề phần.Kích thước = UDim2.new(1, -50, 0, 13)
+			Tiêu đề mục.Tên = "Tiêu đề mục"
 			SectionTitle.Parent = SectionReal
 
 			SectionDecideFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			SectionDecideFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			SectionDecideFrame.AnchorPoint = Vector2.new(0.5, 0)
 			SectionDecideFrame.BorderSizePixel = 0
-			SectionDecideFrame.Position = UDim2.new(0.5, 0, 0, 33)
+			SectionDecideFrame.Position = UDim2.new(0,5, 0, 0, 33)
 			SectionDecideFrame.Size = UDim2.new(0, 0, 0, 2)
 			SectionDecideFrame.Name = "SectionDecideFrame"
-			SectionDecideFrame.Parent = Section
+			SectionDecideFrame.Parent = Phần
 
 			UICorner1.Parent = SectionDecideFrame
 
@@ -1138,109 +1138,109 @@ UIListLayout.Parent = ScrollTab
 				ColorSequenceKeypoint.new(1, Color3.fromRGB(20, 20, 20))
 			}
 			UIGradient.Parent = SectionDecideFrame
-			--// Section Add
-			local SectionAdd = Instance.new("Frame");
-			local UICorner8 = Instance.new("UICorner");
-			local UIListLayout2 = Instance.new("UIListLayout");
+			--// Thêm phần
+			SectionAdd cục bộ = Instance.new("Khung");
+			UICorner8 cục bộ = Instance.new("UICorner");
+			UIListLayout2 cục bộ = Instance.new("UIListLayout");
 
 			SectionAdd.AnchorPoint = Vector2.new(0.5, 0)
 			SectionAdd.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			SectionAdd.BackgroundTransparency = 0.9990000128746033
+			SectionAdd.BackgroundTransparency = 0,9990000128746033
 			SectionAdd.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			SectionAdd.BorderSizePixel = 0
-			SectionAdd.ClipsDescendants = true
+			SectionAdd.ClipsDescendants = đúng
 			SectionAdd.LayoutOrder = 1
-			SectionAdd.Position = UDim2.new(0.5, 0, 0, 38)
+			SectionAdd.Position = UDim2.new(0,5, 0, 0, 38)
 			SectionAdd.Size = UDim2.new(1, 0, 0, 100)
-			SectionAdd.Name = "SectionAdd"
-			SectionAdd.Parent = Section
+			SectionAdd.Name = "Mục Thêm"
+			SectionAdd.Parent = Mục
 
 			UICorner8.CornerRadius = UDim.new(0, 2)
-			UICorner8.Parent = SectionAdd
+			UICorner8.Parent = Phần Thêm
 
 			UIListLayout2.Padding = UDim.new(0, 3)
 			UIListLayout2.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout2.Parent = SectionAdd
-			local OpenSection = true
-			local function UpdateSizeScroll()
-				local OffsetY = 0
-				for _, child in ScrolLayers:GetChildren() do
-					if child.Name ~= "UIListLayout" then
+			UIListLayout2.Parent = PhầnThêm
+			OpenSection cục bộ = đúng
+			hàm cục bộ UpdateSizeScroll()
+				OffsetY cục bộ = 0
+				đối với _, con trong ScrolLayers:GetChildren() làm
+					nếu child.Name ~= "UIListLayout" thì
 						OffsetY = OffsetY + 3 + child.Size.Y.Offset
-					end
-				end
+					kết thúc
+				kết thúc
 				ScrolLayers.CanvasSize = UDim2.new(0, 0, 0, OffsetY)
-			end
-			local function UpdateSizeSection()
-				if OpenSection then
-					local SectionSizeYWitdh = 38
-					for i, v in SectionAdd:GetChildren() do
-						if v.Name ~= "UIListLayout" and v.Name ~= "UICorner" then
+			kết thúc
+			hàm cục bộ UpdateSizeSection()
+				nếu OpenSection thì
+					SectionSizeYWitdh cục bộ = 38
+					đối với i, v trong SectionAdd:GetChildren() thực hiện
+						nếu v.Name ~= "UIListLayout" và v.Name ~= "UICorner" thì
 							SectionSizeYWitdh = SectionSizeYWitdh + v.Size.Y.Offset + 3
-						end
-					end
+						kết thúc
+					kết thúc
 					TweenService:Create(FeatureFrame, TweenInfo.new(0.5), {Rotation = 90}):Play()
-					TweenService:Create(Section, TweenInfo.new(0.5), {Size = UDim2.new(1, 1, 0, SectionSizeYWitdh)}):Play()
-					TweenService:Create(SectionAdd, TweenInfo.new(0.5), {Size = UDim2.new(1, 0, 0, SectionSizeYWitdh - 38)}):Play()
-					TweenService:Create(SectionDecideFrame, TweenInfo.new(0.5), {Size = UDim2.new(1, 0, 0, 2)}):Play()
+					TweenService:Tạo(Phần, TweenInfo.new(0.5), {Kích thước = UDim2.new(1, 1, 0, SectionSizeYWitdh)}):Phát()
+					TweenService:Create(SectionAdd, TweenInfo.new(0.5), {Kích thước = UDim2.new(1, 0, 0, SectionSizeYWitdh - 38)}):Play()
+					TweenService:Create(SectionDecideFrame, TweenInfo.new(0.5), {Kích thước = UDim2.new(1, 0, 0, 2)}):Play()
 					task.wait(0.5)
-					UpdateSizeScroll()
-				end
-			end
-			SectionButton.Activated:Connect(function()
+					Cập nhậtKích thướcCuộn()
+				kết thúc
+			kết thúc
+			SectionButton.Activated:Kết nối(hàm()
 				CircleClick(SectionButton, Mouse.X, Mouse.Y)
-				if OpenSection then
+				nếu OpenSection thì
 					TweenService:Create(FeatureFrame, TweenInfo.new(0.5), {Rotation = 0}):Play()
-					TweenService:Create(Section, TweenInfo.new(0.5), {Size = UDim2.new(1, 1, 0, 30)}):Play()
-					TweenService:Create(SectionDecideFrame, TweenInfo.new(0.5), {Size = UDim2.new(0, 0, 0, 2)}):Play()
-					OpenSection = false
+					TweenService:Tạo(Phần, TweenInfo.new(0.5), {Kích thước = UDim2.new(1, 1, 0, 30)}):Phát()
+					TweenService:Create(SectionDecideFrame, TweenInfo.new(0.5), {Kích thước = UDim2.new(0, 0, 0, 2)}):Play()
+					Mở phần = sai
 					task.wait(0.5)
-					UpdateSizeScroll()
-				else
-					OpenSection = true
-					UpdateSizeSection()
-				end
-			end)
-			SectionAdd.ChildAdded:Connect(UpdateSizeSection)
-			SectionAdd.ChildRemoved:Connect(UpdateSizeSection)
-			UpdateSizeScroll()
+					Cập nhậtKích thướcCuộn()
+				khác
+					OpenSection = đúng
+					Cập nhậtKích thướcPhần()
+				kết thúc
+			kết thúc)
+			SectionAdd.ChildAdded:Kết nối(UpdateSizeSection)
+			SectionAdd.ChildRemoved:Kết nối(UpdateSizeSection)
+			Cập nhậtKích thướcCuộn()
 			
-			local Items = {}
-			local CountItem = 0
-			function Items:AddParagraph(ParagraphConfig)
-				local ParagraphConfig = ParagraphConfig or {}
-				ParagraphConfig.Title = ParagraphConfig.Title or "Title"
-				ParagraphConfig.Content = ParagraphConfig.Content or "Content"
-				local ParagraphFunc = {}
+			mục cục bộ = {}
+			CountItem cục bộ = 0
+			chức năng Items:AddParagraph(ParagraphConfig)
+				ParagraphConfig cục bộ = ParagraphConfig hoặc {}
+				ParagraphConfig.Title = ParagraphConfig.Title hoặc "Tiêu đề"
+				ParagraphConfig.Content = ParagraphConfig.Content hoặc "Nội dung"
+				ParagraphFunc cục bộ = {}
 				
-				local Paragraph = Instance.new("Frame");
-				local UICorner14 = Instance.new("UICorner");
-				local ParagraphTitle = Instance.new("TextLabel");
-				local ParagraphContent = Instance.new("TextLabel");
+				Đoạn văn cục bộ = Instance.new("Khung");
+				UICorner14 cục bộ = Instance.new("UICorner");
+				địa phương ParagraphTitle = Instance.new("TextLabel");
+				ParagraphContent cục bộ = Instance.new("TextLabel");
 
-				Paragraph.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				Paragraph.BackgroundTransparency = 0.9350000023841858
-				Paragraph.BorderColor3 = Color3.fromRGB(0, 0, 0)
-				Paragraph.BorderSizePixel = 0
-				Paragraph.LayoutOrder = CountItem
-				Paragraph.Size = UDim2.new(1, 0, 0, 46)
-				Paragraph.Name = "Paragraph"
-				Paragraph.Parent = SectionAdd
+				Đoạn văn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				Đoạn văn. Độ trong suốt của nền = 0,9350000023841858
+				Đoạn văn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				Đoạn văn.BorderSizePixel = 0
+				Đoạn văn.LayoutOrder = CountItem
+				Đoạn văn.Kích thước = UDim2.new(1, 0, 0, 46)
+				Paragraph.Name = "Đoạn văn"
+				Đoạn văn.Cha = PhầnThêm
 
 				UICorner14.CornerRadius = UDim.new(0, 4)
-				UICorner14.Parent = Paragraph
+				UICorner14.Parent = Đoạn văn
 
-				ParagraphTitle.Font = Enum.Font.GothamBold
-				ParagraphTitle.Text = ParagraphConfig.Title
+				Tiêu đề đoạn văn.Font = Enum.Font.GothamBold
+				Tiêu đề đoạn văn = ParagraphConfig.Tiêu đề
 				ParagraphTitle.TextColor3 = Color3.fromRGB(230.77499270439148, 230.77499270439148, 230.77499270439148)
-				ParagraphTitle.TextSize = 13
-				ParagraphTitle.TextXAlignment = Enum.TextXAlignment.Left
-				ParagraphTitle.TextYAlignment = Enum.TextYAlignment.Top
-				ParagraphTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				ParagraphTitle.BackgroundTransparency = 0.9990000128746033
-				ParagraphTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-				ParagraphTitle.BorderSizePixel = 0
-				ParagraphTitle.Position = UDim2.new(0, 10, 0, 10)
+				Tiêu đề đoạn văn.Kích thước văn bản = 13
+				Tiêu đề đoạn văn.TextXAlignment = Enum.TextXAlignment.Left
+				Tiêu đề đoạn văn.TextYAlignment = Enum.TextYAlignment.Top
+				Tiêu đề đoạn văn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				Tiêu đề đoạn văn. Độ trong suốt của nền = 0,9990000128746033
+				Tiêu đề đoạn văn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				Tiêu đề đoạn văn. BorderSizePixel = 0
+				Tiêu đề đoạn văn.Vị trí = UDim2.new(0, 10, 0, 10)
 				ParagraphTitle.Size = UDim2.new(1, -16, 0, 13)
 				ParagraphTitle.Name = "ParagraphTitle"
 				ParagraphTitle.Parent = Paragraph
